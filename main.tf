@@ -4,6 +4,12 @@ resource "aws_subnet" "this" {
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = var.map_public_ip_on_launch
   tags                    = merge({ Name = var.name }, var.tags)
+  lifecycle {
+    ignore_changes = [
+      tags,
+      tags_all
+    ]
+  }
 }
 
 resource "aws_route_table_association" "this" {
